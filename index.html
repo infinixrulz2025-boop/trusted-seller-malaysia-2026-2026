@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRUSTED SELLER · 2026 - 2027</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        
+        body{font-family:'Share Tech Mono',monospace;min-height:100vh;display:flex;justify-content:center;align-items:center;background:#0a0a0a;padding:20px;position:relative;overflow:hidden}
+        
+        #videoBackground {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            z-index:0;
+            object-fit:cover;
+            pointer-events:none;
+        }
+        
+        .video-overlay {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.15);
+            z-index:1;
+            pointer-events:none;
+        }
+        
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd700' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none;z-index:2}
+
+        #introOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,10,0.7);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;transition:opacity .8s ease,visibility .8s ease;opacity:1;visibility:visible;text-align:center;padding:20px;overflow:hidden}
+        #introOverlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        #introOverlay::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(2px 2px at 20% 30%,rgba(255,215,0,0.3),transparent),radial-gradient(2px 2px at 40% 70%,rgba(255,215,0,0.2),transparent),radial-gradient(2px 2px at 60% 20%,rgba(255,215,0,0.25),transparent),radial-gradient(2px 2px at 80% 80%,rgba(255,215,0,0.2),transparent),radial-gradient(2px 2px at 10% 90%,rgba(255,215,0,0.15),transparent),radial-gradient(2px 2px at 90% 10%,rgba(255,215,0,0.2),transparent),radial-gradient(2px 2px at 50% 50%,rgba(255,215,0,0.2),transparent);background-size:200px 200px;opacity:.3;animation:twinkle 3s infinite alternate}
+        @keyframes twinkle{0%{opacity:.1;transform:scale(1)}100%{opacity:.5;transform:scale(1.05)}}
+        .intro-content{position:relative;z-index:2}
+        .intro-logo{font-size:5rem;margin-bottom:10px;color:#ffd700;text-shadow:0 0 40px rgba(255,215,0,0.4),0 0 80px rgba(255,215,0,0.2),0 0 120px rgba(255,215,0,0.1);animation:glowPulse 2s ease-in-out infinite alternate}
+        @keyframes glowPulse{0%{text-shadow:0 0 20px rgba(255,215,0,0.3)}100%{text-shadow:0 0 60px rgba(255,215,0,0.6),0 0 100px rgba(255,215,0,0.3)}}
+        .intro-title{font-family:'Orbitron',sans-serif;font-size:3.5rem;font-weight:900;color:#ffd700;letter-spacing:4px;margin-bottom:4px;text-shadow:0 0 30px rgba(255,215,0,0.3)}
+        .intro-sub{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.4rem;color:#ffd700;letter-spacing:3px;padding:4px 20px;border:2px solid #ffd700;border-radius:4px;display:inline-block;margin-top:4px;background:rgba(0,0,0,0.7);box-shadow:0 0 30px rgba(255,215,0,0.15)}
+        .intro-year{font-family:'Orbitron',sans-serif;font-size:2.8rem;font-weight:800;color:#ffd700;margin-top:6px;letter-spacing:6px;text-shadow:0 0 30px rgba(255,215,0,0.3)}
+        .intro-spinner{margin-top:30px;width:60px;height:60px;border-radius:50%;border:3px solid rgba(255,215,0,0.15);border-top:3px solid #ffd700;border-right:3px solid #ffd700;border-bottom:3px solid rgba(255,215,0,0.5);border-left:3px solid rgba(255,215,0,0.1);animation:spin 1s linear infinite;position:relative;z-index:2}
+        .intro-spinner::after{content:'🤖';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.4rem}
+        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360)}}
+        .intro-spinner-text{margin-top:16px;font-family:'Orbitron',sans-serif;font-weight:600;font-size:.8rem;color:#ffd700;letter-spacing:3px;position:relative;z-index:2}
+        .intro-icon-bottom{margin-top:24px;font-size:2rem;letter-spacing:12px;position:relative;z-index:2;color:#ffd700;filter:drop-shadow(0 0 20px rgba(255,215,0,0.2))}
+        .intro-glow{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,0.08),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;animation:glowPulseBig 3s ease-in-out infinite alternate}
+        @keyframes glowPulseBig{0%{transform:translate(-50%,-50%) scale(.7);opacity:.3}100%{transform:translate(-50%,-50%) scale(1.3);opacity:.6}}
+
+        #choiceOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(2px);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9998;transition:opacity .6s ease,visibility .6s ease;opacity:0;visibility:hidden;padding:20px}
+        #choiceOverlay.show{opacity:1;visibility:visible}
+        #choiceOverlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .choice-title{font-family:'Orbitron',sans-serif;font-size:2.2rem;margin-bottom:25px;text-align:center;color:#ffd700;text-shadow:0 0 30px rgba(255,215,0,0.3);letter-spacing:3px}
+        .choice-title i{color:#ffd700;margin:0 6px}
+        .choice-box{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+        .choice-card{background:linear-gradient(145deg,rgba(26,26,26,0.85),rgba(10,10,10,0.85));padding:25px 20px;border-radius:8px;text-align:center;cursor:pointer;transition:all .3s ease;border:2px solid #ffd700;box-shadow:0 0 20px rgba(255,215,0,0.1),inset 0 0 20px rgba(255,215,0,0.03);min-width:140px;flex:1;max-width:190px;position:relative;backdrop-filter:blur(2px)}
+        .choice-card::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;border-radius:8px;background:linear-gradient(135deg,#ffd700,transparent,transparent,#ffd700);z-index:-1;opacity:.3}
+        .choice-card:hover{transform:scale(1.05) translateY(-5px);box-shadow:0 0 40px rgba(255,215,0,0.2),inset 0 0 30px rgba(255,215,0,0.05);border-color:#ffed4a}
+        .choice-card:active{transform:scale(.95)}
+        .choice-card i{font-size:2.8rem;color:#ffd700;margin-bottom:8px;text-shadow:0 0 20px rgba(255,215,0,0.2)}
+        .choice-card .choice-label{font-family:'Orbitron',sans-serif;font-size:1rem;color:#ffd700;display:block;letter-spacing:1px}
+        .choice-card .choice-sub{font-size:.7rem;margin-top:2px;color:#aa8800;letter-spacing:1px}
+
+        .page{display:none;max-width:520px;width:100%;opacity:0;animation:fadeInContent .8s ease forwards;animation-delay:.1s;position:relative;z-index:10}
+        .page.show{display:block}
+        @keyframes fadeInContent{0%{opacity:0;transform:scale(.97)}100%{opacity:1;transform:scale(1)}}
+        .page-box{background:rgba(10,10,10,0.75);border-radius:8px;padding:25px 20px 30px;border:2px solid #ffd700;box-shadow:0 0 40px rgba(255,215,0,0.08),inset 0 0 40px rgba(255,215,0,0.03);position:relative;backdrop-filter:blur(6px)}
+        .page-box::before{content:'⚙️';position:absolute;top:-5px;right:-5px;font-size:3rem;opacity:.06;transform:rotate(15deg)}
+        .page-box::after{content:'🤖';position:absolute;bottom:-5px;left:-5px;font-size:2.8rem;opacity:.06;transform:rotate(-10deg)}
+        .page-header{text-align:center;margin-bottom:18px}
+        .page-header h2{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:#ffd700;display:inline-block;text-shadow:0 0 20px rgba(255,215,0,0.2);letter-spacing:2px}
+        .back-btn{background:rgba(0,0,0,0.5);border:2px solid #ffd700;border-radius:4px;padding:6px 16px;font-weight:700;color:#ffd700;font-family:'Share Tech Mono',monospace;font-size:.8rem;cursor:pointer;box-shadow:0 0 20px rgba(255,215,0,0.05);transition:all .08s linear;margin-bottom:12px;display:inline-flex;align-items:center;gap:8px;backdrop-filter:blur(2px)}
+        .back-btn:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+
+        /* CHAT PAGE STYLES */
+        .chat-name-input {
+            display:flex;
+            gap:6px;
+            margin-bottom:10px;
+            flex-wrap:wrap;
+        }
+        .chat-name-input input {
+            flex:1;
+            padding:7px 12px;
+            border-radius:4px;
+            border:2px solid #333;
+            background:rgba(10,10,10,0.6);
+            font-family:'Share Tech Mono',monospace;
+            font-size:.8rem;
+            outline:none;
+            color:#ffd700;
+            min-width:100px;
+        }
+        .chat-name-input input:focus{border-color:#ffd700}
+        .chat-name-input input::placeholder{color:#443300}
+        .chat-name-input button {
+            padding:7px 16px;
+            border-radius:4px;
+            border:2px solid #ffd700;
+            background:rgba(0,0,0,0.4);
+            font-weight:700;
+            color:#ffd700;
+            cursor:pointer;
+            transition:all .08s linear;
+            font-family:'Share Tech Mono',monospace;
+            font-size:.8rem;
+            backdrop-filter:blur(2px);
+            white-space:nowrap;
+        }
+        .chat-name-input button:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .chat-name-input .name-error {
+            color:#ff4444;
+            font-size:.7rem;
+            font-weight:600;
+            width:100%;
+            text-align:center;
+            min-height:18px;
+        }
+
+        .chat-container {
+            display:flex;
+            flex-direction:column;
+            height:400px;
+            max-height:55vh;
+            background:rgba(10,10,10,0.6);
+            border-radius:4px;
+            border:2px solid #ffd700;
+            overflow:hidden;
+            margin-top:4px;
+        }
+        .chat-messages {
+            flex:1;
+            overflow-y:auto;
+            padding:10px 12px;
+            display:flex;
+            flex-direction:column;
+            gap:4px;
+            background:rgba(0,0,0,0.3);
+        }
+        .chat-messages::-webkit-scrollbar{width:5px}
+        .chat-messages::-webkit-scrollbar-track{background:rgba(17,17,17,0.5);border-radius:4px}
+        .chat-messages::-webkit-scrollbar-thumb{background:#ffd700;border-radius:4px}
+        .chat-msg {
+            background:rgba(17,17,17,0.7);
+            border-radius:4px;
+            padding:6px 10px;
+            border-left:3px solid #ffd700;
+            animation:msgIn .3s ease;
+        }
+        @keyframes msgIn{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+        .chat-msg .msg-header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:2px;
+            margin-bottom:1px;
+        }
+        .chat-msg .msg-user {
+            font-family:'Orbitron',sans-serif;
+            font-weight:700;
+            font-size:.7rem;
+            color:#ffd700;
+            letter-spacing:1px;
+            cursor:pointer;
+        }
+        .chat-msg .msg-user:hover{color:#ffed4a;text-decoration:underline}
+        .chat-msg .msg-time {
+            font-size:.5rem;
+            color:#665500;
+        }
+        .chat-msg .msg-text {
+            font-size:.78rem;
+            color:#ccaa00;
+            word-wrap:break-word;
+            padding:2px 0;
+        }
+        .chat-msg .msg-text .reply-to {
+            display:block;
+            font-size:.6rem;
+            color:#665500;
+            padding:2px 6px;
+            background:rgba(0,0,0,0.3);
+            border-radius:3px;
+            margin-bottom:2px;
+            border-left:2px solid #ffd700;
+        }
+        .chat-msg .msg-text .reply-to i{margin-right:4px;color:#ffd700}
+        .chat-msg .msg-actions {
+            display:flex;
+            gap:6px;
+            margin-top:2px;
+            flex-wrap:wrap;
+        }
+        .chat-msg .msg-actions button {
+            background:transparent;
+            border:none;
+            color:#665500;
+            font-size:.6rem;
+            cursor:pointer;
+            transition:color .2s;
+            padding:1px 4px;
+            font-family:'Share Tech Mono',monospace;
+        }
+        .chat-msg .msg-actions button:hover{color:#ffd700}
+        .chat-msg .msg-actions .del-btn:hover{color:#ff4444}
+        .chat-input-area {
+            display:flex;
+            gap:6px;
+            padding:6px 8px;
+            background:rgba(17,17,17,0.5);
+            border-top:2px solid rgba(255,215,0,0.15);
+            flex-wrap:wrap;
+            align-items:center;
+        }
+        .chat-input-area input {
+            flex:1;
+            padding:6px 10px;
+            border-radius:4px;
+            border:2px solid #333;
+            background:rgba(10,10,10,0.6);
+            font-family:'Share Tech Mono',monospace;
+            font-size:.78rem;
+            outline:none;
+            color:#ffd700;
+            min-width:60px;
+        }
+        .chat-input-area input:focus{border-color:#ffd700}
+        .chat-input-area input::placeholder{color:#443300}
+        .chat-input-area button {
+            padding:6px 14px;
+            border-radius:4px;
+            border:2px solid #ffd700;
+            background:rgba(0,0,0,0.4);
+            font-weight:700;
+            color:#ffd700;
+            cursor:pointer;
+            transition:all .08s linear;
+            font-family:'Share Tech Mono',monospace;
+            font-size:.75rem;
+            display:flex;
+            align-items:center;
+            gap:5px;
+            backdrop-filter:blur(2px);
+            white-space:nowrap;
+        }
+        .chat-input-area button:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .chat-input-area button:active{transform:scale(.95)}
+        
+        .chat-reply-indicator {
+            display:none;
+            background:rgba(17,17,17,0.8);
+            border-radius:4px;
+            padding:4px 10px;
+            margin-bottom:4px;
+            border-left:3px solid #ffd700;
+            font-size:.7rem;
+            color:#aa8800;
+            align-items:center;
+            gap:8px;
+        }
+        .chat-reply-indicator.show{display:flex}
+        .chat-reply-indicator .cancel-reply {
+            background:transparent;
+            border:none;
+            color:#ff4444;
+            cursor:pointer;
+            font-size:.8rem;
+            padding:0 4px;
+        }
+        .chat-reply-indicator .cancel-reply:hover{color:#ff8888}
+
+        .chat-user-display {
+            font-family:'Orbitron',sans-serif;
+            font-weight:700;
+            font-size:.65rem;
+            color:#ffd700;
+            text-align:center;
+            padding:3px 0;
+            letter-spacing:1px;
+            border-bottom:1px solid rgba(255,215,0,0.1);
+            margin-bottom:3px;
+        }
+        .chat-user-display i{margin-right:4px;color:#ffd700}
+        .chat-user-display .change-name-btn {
+            background:transparent;
+            border:1px solid #665500;
+            border-radius:4px;
+            color:#665500;
+            padding:1px 8px;
+            font-size:.55rem;
+            cursor:pointer;
+            margin-left:6px;
+            font-family:'Share Tech Mono',monospace;
+            transition:all .2s;
+        }
+        .chat-user-display .change-name-btn:hover{border-color:#ffd700;color:#ffd700}
+        .chat-count-badge {
+            font-size:.5rem;
+            color:#665500;
+            text-align:center;
+            padding:2px 0;
+        }
+        .chat-admin-actions {
+            display:flex;
+            gap:6px;
+            justify-content:center;
+            padding:2px 0;
+        }
+        .chat-admin-actions button {
+            background:transparent;
+            border:2px solid #665500;
+            border-radius:4px;
+            padding:2px 10px;
+            font-family:'Share Tech Mono',monospace;
+            font-size:.55rem;
+            color:#665500;
+            cursor:pointer;
+            transition:all .2s;
+        }
+        .chat-admin-actions button:hover {
+            border-color:#ff4444;
+            color:#ff4444;
+        }
+
+        .search-wrap{display:flex;align-items:center;background:rgba(17,17,17,0.8);border-radius:4px;padding:4px 4px 4px 16px;margin:10px 0 14px 0;border:2px solid #ffd700;box-shadow:0 0 20px rgba(255,215,0,0.05);backdrop-filter:blur(2px)}
+        .search-wrap i{color:#ffd700;font-size:1rem;margin-right:6px}
+        .search-wrap input{flex:1;border:none;background:transparent;padding:8px 0;font-family:'Share Tech Mono',monospace;font-weight:600;font-size:.9rem;color:#ffd700;outline:none;min-width:0}
+        .search-wrap input::placeholder{color:#665500}
+        .search-wrap button{background:rgba(0,0,0,0.5);border:2px solid #ffd700;border-radius:4px;padding:6px 16px;font-weight:700;color:#ffd700;font-family:'Share Tech Mono',monospace;font-size:.8rem;cursor:pointer;box-shadow:0 0 20px rgba(255,215,0,0.05);transition:all .08s linear;display:flex;align-items:center;gap:6px;white-space:nowrap;backdrop-filter:blur(2px)}
+        .search-wrap button:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+
+        .slide-wrapper{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 0 30px rgba(255,215,0,0.05);border:2px solid #ffd700;background:rgba(10,10,10,0.7);margin:5px 0 5px;backdrop-filter:blur(2px)}
+        .slide-track{display:flex;transition:transform .6s cubic-bezier(.25,.46,.45,.94);will-change:transform}
+        .slide-item{min-width:100%;padding:25px 15px 20px;text-align:center;min-height:240px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(10,10,10,0.6);border-bottom:2px solid rgba(255,215,0,0.1)}
+        .slide-item .slide-icon{font-size:3rem;color:#ffd700;text-shadow:0 0 40px rgba(255,215,0,0.2);margin-bottom:2px}
+        .slide-item .slide-title{font-family:'Orbitron',sans-serif;font-size:1.6rem;color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,0.15);letter-spacing:2px}
+        .slide-item .slide-sub{font-weight:600;font-size:.7rem;margin-top:2px;letter-spacing:2px;color:#aa8800}
+        .slide-item .slide-sub i{color:#ffd700}
+
+        .rating-stars{display:flex;gap:4px;flex-direction:row-reverse;justify-content:center;margin:8px 0 2px 0}
+        .rating-stars input{display:none}
+        .rating-stars label{font-size:1.8rem;color:#444;cursor:pointer;transition:all .2s ease}
+        .rating-stars label:hover,.rating-stars label:hover~label,.rating-stars input:checked~label{color:#ffd700;text-shadow:0 0 30px rgba(255,215,0,0.4)}
+        .rating-stars label:hover{transform:scale(1.15)}
+        .rating-label{color:#665500;font-size:.55rem;font-weight:600;margin-top:1px;letter-spacing:2px;font-family:'Orbitron',sans-serif}
+
+        .slide-wa-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:rgba(0,0,0,0.4);color:#ffd700;font-weight:700;font-size:.8rem;padding:7px 16px;border-radius:4px;text-decoration:none;border:2px solid #ffd700;transition:all .08s linear;margin-top:4px;width:100%;max-width:200px;font-family:'Share Tech Mono',monospace;backdrop-filter:blur(2px)}
+        .slide-wa-btn:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .slide-wa-btn:active{transform:scale(.95)}
+        .slide-wa-btn i{font-size:1.1rem}
+
+        .slide-controls{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:10px}
+        .slide-btn{width:40px;height:40px;border-radius:4px;border:2px solid #ffd700;background:rgba(0,0,0,0.4);color:#ffd700;font-size:1rem;cursor:pointer;transition:all .08s linear;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+        .slide-btn:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .slide-btn:active{transform:scale(.9)}
+        .slide-dots{display:flex;gap:8px}
+        .dot{width:10px;height:10px;border-radius:50%;background:#222;border:2px solid #665500;cursor:pointer;transition:all .3s ease}
+        .dot.active{background:#ffd700;border-color:#ffd700;transform:scale(1.2);box-shadow:0 0 20px rgba(255,215,0,0.4)}
+        .slide-label{text-align:center;margin-top:6px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;padding:4px 14px;border-radius:4px;display:inline-block;color:#ffd700;border:1px solid rgba(255,215,0,0.2);letter-spacing:1px}
+        .slide-label i{margin-right:4px;color:#ffd700}
+        .warna-strip{display:flex;justify-content:center;gap:5px;margin-top:12px}
+        .warna-strip span{width:32px;height:4px;border-radius:2px;display:inline-block}
+        .warna-strip span:nth-child(1){background:#ffd700}
+        .warna-strip span:nth-child(2){background:#ffed4a}
+        .warna-strip span:nth-child(3){background:#ccaa00}
+        .warna-strip span:nth-child(4){background:#ffd700}
+        .warna-strip span:nth-child(5){background:#ffed4a}
+        .warna-strip span:nth-child(6){background:#ccaa00}
+        .warna-strip span:nth-child(7){background:#ffd700}
+
+        .feedback-form-container{background:rgba(17,17,17,0.8);border-radius:4px;padding:14px 16px 16px;margin-top:12px;border:2px solid #ffd700;box-shadow:0 0 20px rgba(255,215,0,0.05);display:none;animation:slideUp .4s ease;backdrop-filter:blur(2px)}
+        .feedback-form-container.show{display:block}
+        @keyframes slideUp{0%{opacity:0;transform:translateY(15px)}100%{opacity:1;transform:translateY(0)}}
+        .feedback-form-container .form-title{font-family:'Orbitron',sans-serif;font-size:.75rem;margin-bottom:8px;text-align:center;color:#ffd700;letter-spacing:1px}
+        .feedback-form-container .form-title i{color:#ffd700;margin-right:4px}
+        .feedback-form-container .form-row{display:flex;flex-direction:column;gap:8px}
+        .feedback-form-container .form-row input,.feedback-form-container .form-row textarea{padding:7px 12px;border-radius:4px;border:2px solid #333;background:rgba(10,10,10,0.6);font-family:'Share Tech Mono',monospace;font-size:.8rem;outline:none;color:#ffd700;transition:border .2s;width:100%}
+        .feedback-form-container .form-row input:focus,.feedback-form-container .form-row textarea:focus{border-color:#ffd700;box-shadow:0 0 20px rgba(255,215,0,0.05)}
+        .feedback-form-container .form-row input::placeholder,.feedback-form-container .form-row textarea::placeholder{color:#443300}
+        .feedback-form-container .form-row textarea{resize:vertical;min-height:50px;max-height:100px}
+        .feedback-form-container .form-row button{padding:7px 16px;border-radius:4px;border:2px solid #ffd700;background:rgba(0,0,0,0.4);font-weight:700;color:#ffd700;cursor:pointer;transition:all .08s linear;font-family:'Share Tech Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;backdrop-filter:blur(2px)}
+        .feedback-form-container .form-row button:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .feedback-msg{font-size:.7rem;font-weight:600;min-height:18px;margin-top:4px;text-align:center;font-family:'Share Tech Mono',monospace}
+        .feedback-msg.success{color:#ffd700}
+        .feedback-msg.error{color:#ff4444}
+
+        .rating-filter-wrap-fb {
+            display:flex;
+            justify-content:center;
+            gap:6px;
+            margin:8px 0 14px 0;
+            flex-wrap:wrap;
+        }
+        .rating-filter-btn-fb {
+            background:rgba(0,0,0,0.4);
+            border:2px solid #665500;
+            border-radius:4px;
+            padding:4px 12px;
+            font-family:'Share Tech Mono',monospace;
+            font-weight:700;
+            font-size:.7rem;
+            color:#665500;
+            cursor:pointer;
+            transition:all .2s ease;
+            backdrop-filter:blur(2px);
+            letter-spacing:1px;
+        }
+        .rating-filter-btn-fb:hover {
+            border-color:#ffd700;
+            color:#ffd700;
+            box-shadow:0 0 20px rgba(255,215,0,0.1);
+        }
+        .rating-filter-btn-fb.active {
+            border-color:#ffd700;
+            color:#ffd700;
+            background:rgba(255,215,0,0.08);
+            box-shadow:0 0 25px rgba(255,215,0,0.1);
+        }
+        .rating-filter-btn-fb i {
+            margin-right:4px;
+        }
+
+        .daftar-form{display:flex;flex-direction:column;gap:12px}
+        .daftar-form .form-group{display:flex;flex-direction:column;gap:3px}
+        .daftar-form .form-group label{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;color:#ffd700;letter-spacing:1px}
+        .daftar-form .form-group input{padding:7px 12px;border-radius:4px;border:2px solid #333;background:rgba(10,10,10,0.6);font-family:'Share Tech Mono',monospace;font-size:.85rem;outline:none;color:#ffd700;transition:border .2s}
+        .daftar-form .form-group input:focus{border-color:#ffd700;box-shadow:0 0 20px rgba(255,215,0,0.05)}
+        .daftar-form .form-group input::placeholder{color:#443300}
+        .daftar-form button{padding:8px 16px;border-radius:4px;border:2px solid #ffd700;background:rgba(0,0,0,0.4);font-weight:700;color:#ffd700;cursor:pointer;transition:all .08s linear;font-family:'Share Tech Mono',monospace;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px;backdrop-filter:blur(2px)}
+        .daftar-form button:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .daftar-msg{text-align:center;font-size:.8rem;font-weight:600;margin-top:6px;min-height:22px;font-family:'Share Tech Mono',monospace}
+        .daftar-msg.success{color:#ffd700}
+        .daftar-msg.error{color:#ff4444}
+
+        .dashboard-login{display:flex;flex-direction:column;gap:10px}
+        .dashboard-login input{padding:7px 12px;border-radius:4px;border:2px solid #333;background:rgba(10,10,10,0.6);font-family:'Share Tech Mono',monospace;font-size:.85rem;outline:none;color:#ffd700;transition:border .2s}
+        .dashboard-login input:focus{border-color:#ffd700;box-shadow:0 0 20px rgba(255,215,0,0.05)}
+        .dashboard-login input::placeholder{color:#443300}
+        .dashboard-login button{padding:8px 16px;border-radius:4px;border:2px solid #ffd700;background:rgba(0,0,0,0.4);font-weight:700;color:#ffd700;cursor:pointer;transition:all .08s linear;font-family:'Share Tech Mono',monospace;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:10px;backdrop-filter:blur(2px)}
+        .dashboard-login button:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+        .dashboard-login .login-error{font-size:.75rem;font-weight:600;text-align:center;min-height:18px;color:#ff4444;font-family:'Share Tech Mono',monospace}
+        .dashboard-content{display:none}
+        .dashboard-content.show{display:block}
+        .dashboard-content p{font-family:'Orbitron',sans-serif;font-weight:700;margin-bottom:6px;color:#ffd700;letter-spacing:1px;font-size:.8rem}
+        
+        .seller-active-list{max-height:320px;overflow-y:auto;margin-top:8px;margin-bottom:15px}
+        .seller-active-list::-webkit-scrollbar{width:5px}
+        .seller-active-list::-webkit-scrollbar-track{background:rgba(17,17,17,0.5);border-radius:4px}
+        .seller-active-list::-webkit-scrollbar-thumb{background:#ffd700;border-radius:4px}
+        .seller-active-item{background:rgba(10,10,10,0.6);border-radius:4px;padding:8px 12px;margin-bottom:6px;border-left:4px solid #ffd700;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;border:1px solid rgba(255,215,0,0.1)}
+        .seller-active-item .info{font-size:.8rem;color:#ffd700}
+        .seller-active-item .info strong{color:#ffed4a}
+        .seller-active-item .actions{display:flex;gap:4px}
+        .seller-active-item .actions .btn-kick{background:transparent;border:2px solid #ff4444;border-radius:4px;padding:3px 10px;font-weight:700;color:#ff4444;font-family:'Share Tech Mono',monospace;font-size:.6rem;cursor:pointer;transition:all .08s linear}
+        .seller-active-item .actions .btn-kick:hover{background:#ff4444;color:#0a0a0a}
+
+        .pendaftar-list{max-height:320px;overflow-y:auto;margin-top:8px}
+        .pendaftar-list::-webkit-scrollbar{width:5px}
+        .pendaftar-list::-webkit-scrollbar-track{background:rgba(17,17,17,0.5);border-radius:4px}
+        .pendaftar-list::-webkit-scrollbar-thumb{background:#ffd700;border-radius:4px}
+        .pendaftar-item{background:rgba(10,10,10,0.6);border-radius:4px;padding:8px 12px;margin-bottom:6px;border-left:4px solid #ffd700;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;border:1px solid rgba(255,215,0,0.1)}
+        .pendaftar-item .info{font-size:.8rem;color:#ffd700}
+        .pendaftar-item .info strong{color:#ffed4a}
+        .pendaftar-item .actions{display:flex;gap:4px}
+        .pendaftar-item .actions button{padding:3px 10px;border-radius:4px;border:2px solid;font-family:'Share Tech Mono',monospace;font-weight:700;font-size:.6rem;cursor:pointer;transition:all .08s linear}
+        .pendaftar-item .actions .btn-accept{background:transparent;border-color:#ffd700;color:#ffd700}
+        .pendaftar-item .actions .btn-accept:hover{background:#ffd700;color:#0a0a0a}
+        .pendaftar-item .actions .btn-decline{background:transparent;border-color:#ff4444;color:#ff4444}
+        .pendaftar-item .actions .btn-decline:hover{background:#ff4444;color:#0a0a0a}
+        .pendaftar-item .status-badge{font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:4px;border:2px solid}
+        .status-badge.pending{border-color:#ffd700;color:#ffd700}
+        .status-badge.accepted{border-color:#ffd700;color:#ffd700;background:rgba(255,215,0,0.1)}
+        .status-badge.declined{border-color:#ff4444;color:#ff4444}
+        .dashboard-empty{text-align:center;font-weight:600;padding:16px 0;color:#665500;font-family:'Share Tech Mono',monospace}
+
+        .feedback-list-box{max-height:55vh;overflow-y:auto}
+        .feedback-list-box::-webkit-scrollbar{width:5px}
+        .feedback-list-box::-webkit-scrollbar-track{background:rgba(17,17,17,0.5);border-radius:4px}
+        .feedback-list-box::-webkit-scrollbar-thumb{background:#ffd700;border-radius:4px}
+        .feedback-item{background:rgba(10,10,10,0.6);border-radius:4px;padding:8px 12px;margin-bottom:6px;border-left:4px solid #ffd700;border:1px solid rgba(255,215,0,0.08);backdrop-filter:blur(2px)}
+        .feedback-item .fb-seller{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.8rem;color:#ffd700;letter-spacing:1px}
+        .feedback-item .fb-user{font-weight:600;font-size:.7rem;color:#aa8800}
+        .feedback-item .fb-stars{color:#ffd700;font-size:.85rem;letter-spacing:2px}
+        .feedback-item .fb-rating-text{font-size:.7rem;font-weight:600;color:#aa8800}
+        .feedback-item .fb-comment{font-size:.75rem;margin-top:2px;padding:4px 8px;background:rgba(17,17,17,0.5);border-radius:4px;font-style:italic;border-left:3px solid #ffd700;color:#ccaa00}
+        .feedback-empty{text-align:center;font-weight:600;padding:16px 0;color:#665500;font-family:'Share Tech Mono',monospace}
+
+        #successPopup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);display:none;justify-content:center;align-items:center;z-index:10000;animation:fadeInPopup .3s ease}
+        #successPopup.show{display:flex}
+        @keyframes fadeInPopup{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}
+        .success-popup-content{background:rgba(10,10,10,0.85);border-radius:8px;padding:25px 20px 24px;text-align:center;max-width:340px;width:90%;border:2px solid #ffd700;box-shadow:0 0 60px rgba(255,215,0,0.1);position:relative;overflow:hidden;backdrop-filter:blur(4px)}
+        .success-popup-content::before{content:'🤖';position:absolute;top:-10px;right:-10px;font-size:4rem;opacity:.04;transform:rotate(20deg)}
+        .success-popup-content .success-icon{font-size:3.2rem;color:#ffd700;margin-bottom:4px;animation:popBounce .6s ease}
+        @keyframes popBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+        .success-popup-content .success-title{font-family:'Orbitron',sans-serif;font-size:1.1rem;color:#ffd700;letter-spacing:2px}
+        .success-popup-content .success-sub{font-size:.8rem;font-weight:500;margin-bottom:10px;color:#aa8800}
+        .success-popup-content .btn-close-popup{background:rgba(0,0,0,0.4);border:2px solid #ffd700;border-radius:4px;padding:7px 20px;font-weight:700;color:#ffd700;font-family:'Share Tech Mono',monospace;font-size:.8rem;cursor:pointer;transition:all .08s linear;display:inline-flex;align-items:center;gap:8px;backdrop-filter:blur(2px)}
+        .success-popup-content .btn-close-popup:hover{background:#ffd700;color:#0a0a0a;box-shadow:0 0 30px rgba(255,215,0,0.2)}
+
+        #soundToggle {
+            position:fixed;
+            bottom:20px;
+            right:20px;
+            z-index:9999;
+            background:rgba(0,0,0,0.5);
+            border:2px solid #ffd700;
+            border-radius:50%;
+            width:50px;
+            height:50px;
+            color:#ffd700;
+            font-size:1.2rem;
+            cursor:pointer;
+            transition:all .3s ease;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            backdrop-filter:blur(4px);
+        }
+        #soundToggle:hover {
+            background:#ffd700;
+            color:#0a0a0a;
+            transform:scale(1.1);
+        }
+
+        /* Owner Website Button Style */
+        .owner-wa-btn {
+            background:linear-gradient(145deg,rgba(26,26,26,0.85),rgba(10,10,10,0.85));
+            padding:25px 20px;
+            border-radius:8px;
+            text-align:center;
+            cursor:pointer;
+            transition:all .3s ease;
+            border:2px solid #25D366;
+            box-shadow:0 0 20px rgba(37,211,102,0.1),inset 0 0 20px rgba(37,211,102,0.03);
+            min-width:140px;
+            flex:1;
+            max-width:190px;
+            position:relative;
+            backdrop-filter:blur(2px);
+            text-decoration:none;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:4px;
+        }
+        .owner-wa-btn::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;border-radius:8px;background:linear-gradient(135deg,#25D366,transparent,transparent,#25D366);z-index:-1;opacity:.3}
+        .owner-wa-btn:hover{transform:scale(1.05) translateY(-5px);box-shadow:0 0 40px rgba(37,211,102,0.2),inset 0 0 30px rgba(37,211,102,0.05);border-color:#30d96a}
+        .owner-wa-btn:active{transform:scale(.95)}
+        .owner-wa-btn i{font-size:2.8rem;color:#25D366;margin-bottom:4px;text-shadow:0 0 20px rgba(37,211,102,0.2)}
+        .owner-wa-btn .choice-label{font-family:'Orbitron',sans-serif;font-size:1rem;color:#25D366;display:block;letter-spacing:1px}
+        .owner-wa-btn .choice-sub{font-size:.7rem;margin-top:2px;color:#1a8a4a;letter-spacing:1px}
+
+        @media(max-width:480px){
+            .page-box{padding:16px 12px 20px}
+            .page-header h2{font-size:1rem}
+            .slide-item{padding:16px 10px 14px;min-height:200px}
+            .slide-item .slide-title{font-size:1.3rem}
+            .slide-btn{width:34px;height:34px;font-size:.8rem}
+            .dot{width:8px;height:8px}
+            .choice-card{padding:16px 12px;min-width:100px;max-width:140px}
+            .choice-card i{font-size:2rem}
+            .choice-card .choice-label{font-size:.8rem}
+            .owner-wa-btn{padding:16px 12px;min-width:100px;max-width:140px}
+            .owner-wa-btn i{font-size:2rem}
+            .owner-wa-btn .choice-label{font-size:.8rem}
+            .choice-title{font-size:1.2rem}
+            .intro-title{font-size:2.2rem}
+            .intro-logo{font-size:3.2rem}
+            .intro-sub{font-size:1rem}
+            .intro-year{font-size:1.8rem}
+            .pendaftar-item{flex-direction:column;align-items:stretch;text-align:center}
+            .pendaftar-item .actions{justify-content:center}
+            .intro-spinner{width:45px;height:45px}
+            .rating-stars label{font-size:1.5rem}
+            .feedback-form-container{padding:10px 12px 12px}
+            #soundToggle {width:40px;height:40px;font-size:1rem;bottom:15px;right:15px}
+            .seller-active-item{flex-direction:column;align-items:stretch;text-align:center}
+            .seller-active-item .actions{justify-content:center}
+            .chat-container{height:300px}
+            .chat-input-area input{font-size:.7rem}
+            .chat-msg .msg-user{font-size:.65rem}
+            .chat-name-input{flex-direction:column}
+            .chat-name-input input{width:100%}
+            .chat-msg .msg-actions button{font-size:.5rem}
+        }
+        @media(max-width:360px){
+            .slide-item .slide-title{font-size:1.1rem}
+            .slide-item{padding:12px 8px 10px;min-height:170px}
+            .choice-card{padding:12px 8px;min-width:80px;max-width:110px}
+            .choice-card i{font-size:1.6rem}
+            .choice-card .choice-label{font-size:.7rem}
+            .owner-wa-btn{padding:12px 8px;min-width:80px;max-width:110px}
+            .owner-wa-btn i{font-size:1.6rem}
+            .owner-wa-btn .choice-label{font-size:.7rem}
+            .intro-title{font-size:1.8rem}
+            .intro-logo{font-size:2.6rem}
+            .intro-sub{font-size:.85rem}
+            .intro-year{font-size:1.5rem}
+            .intro-spinner{width:35px;height:35px}
+            .rating-stars label{font-size:1.3rem}
+        }
+    </style>
+</head>
+<body>
+
+    <video id="videoBackground" autoplay loop playsinline muted>
+        <source src="https://files.catbox.moe/c76mow.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+
+    <button id="soundToggle" onclick="toggleSound()">
+        <i class="fas fa-volume-mute"></i>
+    </button>
+
+    <div id="introOverlay">
+        <div class="intro-glow"></div>
+        <div class="intro-content">
+            <div class="intro-logo"><i class="fas fa-shield-alt"></i></div>
+            <div class="intro-title">TRUSTED SELLER</div>
+            <div class="intro-year">2026 – 2027</div>
+            <div class="intro-spinner-text">LOADING...</div>
+        </div>
+    </div>
+
+    <div id="choiceOverlay">
+        <div class="choice-title"><i class="fas fa-"></i> PILIH MENU <i class="fas fa-"></i></div>
+        <div class="choice-box">
+            <div class="choice-card" onclick="showPage('chatPage')">
+                <i class="fas fa-comments"></i>
+                <span class="choice-label">PUBLIC CHAT</span>
+                <span class="choice-sub">CHAT RAMAI-RAMAI</span>
+            </div>
+            <div class="choice-card" onclick="showPage('sellerPage')">
+                <i class="fas fa-store-alt"></i>
+                <span class="choice-label">LIST SELLER</span>
+                <span class="choice-sub">SCAN SELLER</span>
+            </div>
+            <div class="choice-card" onclick="showPage('feedbackPage')">
+                <i class="fas fa-star"></i>
+                <span class="choice-label">FEEDBACK</span>
+                <span class="choice-sub">RATING & ULASAN</span>
+            </div>
+            <div class="choice-card" onclick="showPage('daftarPage')">
+                <i class="fas fa-user-plus"></i>
+                <span class="choice-label">DAFTAR</span>
+                <span class="choice-sub">JADI SELLER</span>
+            </div>
+            <div class="choice-card" onclick="showPage('dashboardPage')">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="choice-label">DASHBOARD</span>
+                <span class="choice-sub">OWNER ONLY</span>
+            </div>
+            <a href="https://wa.me/60148664518" target="_blank" class="owner-wa-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span class="choice-label">OWNER WEBSITE</span>
+                <span class="choice-sub">HUBUNGI OWNER</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- CHAT PAGE - Tanpa Login -->
+    <div class="page" id="chatPage">
+        <div class="page-box">
+            <div style="text-align:left;">
+                <button class="back-btn" onclick="backToChoice()"><i class="fas fa-arrow-left"></i> KEMBALI</button>
+            </div>
+            <div class="page-header">
+                <h2><i class="fas fa-comments" style="color:#ffd700;"></i> PUBLIC CHAT</h2>
+            </div>
+            
+            <!-- Input Nama -->
+            <div class="chat-name-input">
+                <input type="text" id="chatNameInput" placeholder="NAMA ANDA..." />
+                <button onclick="setChatName()"><i class="fas fa-user-check"></i> SET NAMA</button>
+                <div class="name-error" id="chatNameError"></div>
+            </div>
+
+            <div id="chatArea">
+                <div class="chat-user-display" id="chatUserDisplay">
+                    <i class="fas fa-user-circle"></i> <span id="chatCurrentUser">-</span>
+                    <button class="change-name-btn" onclick="changeName()"><i class="fas fa-edit"></i> TUKAR NAMA</button>
+                </div>
+                
+                <!-- Reply Indicator -->
+                <div class="chat-reply-indicator" id="replyIndicator">
+                    <i class="fas fa-reply"></i> <span id="replyToText">Membalas: </span>
+                    <button class="cancel-reply" onclick="cancelReply()"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="TAIP MESEJ..." />
+                        <button onclick="sendChat()"><i class="fas fa-paper-plane"></i> HANTAR</button>
+                    </div>
+                </div>
+                <div class="chat-count-badge" id="chatCountBadge">0 mesej</div>
+                <div class="chat-admin-actions">
+                    <button onclick="clearAllChat()"><i class="fas fa-trash-alt"></i> KOSONGKAN SEMUA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="sellerPage">
+        <div class="page-box">
+            <div style="text-align:left;">
+                <button class="back-btn" onclick="backToChoice()"><i class="fas fa-arrow-left"></i> KEMBALI</button>
+            </div>
+            <div class="page-header">
+                <h2><i class="fas fa-store-alt" style="color:#ffd700;"></i> LIST SELLER TRUSTED</h2>
+            </div>
+            <div class="search-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="CARI NAMA SELLER..." />
+                <button id="searchBtn"><i class="fas fa-search"></i> SEARCH</button>
+            </div>
+            <div class="slide-wrapper">
+                <div class="slide-track" id="slideTrack"></div>
+            </div>
+            <div class="slide-controls">
+                <button class="slide-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                <div class="slide-dots" id="dotsContainer"></div>
+                <button class="slide-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div style="text-align:center;">
+                <span class="slide-label" id="slideLabel"><i class="fas fa-robot"></i> LOADING...</span>
+            </div>
+            <div class="feedback-form-container" id="feedbackFormContainer">
+                <div class="form-title"><i class="fas fa-star"></i> MASUKKAN USERNAME & RATING UNTUK SELLER INI...</div>
+                <div class="form-row">
+                    <input type="text" id="fbUsername" placeholder="USERNAME..." />
+                    <textarea id="fbComment" placeholder="KOMENTAR / AYAT UNTUK SELLER INI..." rows="2"></textarea>
+                    <button onclick="submitFeedback()"><i class="fas fa-paper-plane"></i> KIRIM FEEDBACK</button>
+                </div>
+                <div class="feedback-msg" id="fbMsg"></div>
+            </div>
+            <div class="warna-strip">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="feedbackPage">
+        <div class="page-box">
+            <div style="text-align:left;">
+                <button class="back-btn" onclick="backToChoice()"><i class="fas fa-arrow-left"></i> KEMBALI</button>
+            </div>
+            <div class="page-header">
+                <h2><i class="fas fa-star" style="color:#ffd700;"></i> FEEDBACK CUSTOMER</h2>
+            </div>
+            
+            <div class="rating-filter-wrap-fb" id="ratingFilterWrapFb">
+                <button class="rating-filter-btn-fb active" data-filter="all" onclick="filterFeedbackFb('all')"><i class="fas fa-star"></i> ALL</button>
+                <button class="rating-filter-btn-fb" data-filter="1" onclick="filterFeedbackFb('1')"><i class="fas fa-star"></i> 1</button>
+                <button class="rating-filter-btn-fb" data-filter="2" onclick="filterFeedbackFb('2')"><i class="fas fa-star"></i> 2</button>
+                <button class="rating-filter-btn-fb" data-filter="3" onclick="filterFeedbackFb('3')"><i class="fas fa-star"></i> 3</button>
+                <button class="rating-filter-btn-fb" data-filter="4" onclick="filterFeedbackFb('4')"><i class="fas fa-star"></i> 4</button>
+                <button class="rating-filter-btn-fb" data-filter="5" onclick="filterFeedbackFb('5')"><i class="fas fa-star"></i> 5</button>
+            </div>
+
+            <div class="feedback-list-box" id="feedbackList">
+                <div class="feedback-empty">BELUM ADA FEEDBACK. JADI YANG PERTAMA! ⭐</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="daftarPage">
+        <div class="page-box">
+            <div style="text-align:left;">
+                <button class="back-btn" onclick="backToChoice()"><i class="fas fa-arrow-left"></i> KEMBALI</button>
+            </div>
+            <div class="page-header">
+                <h2><i class="fas fa-user-plus" style="color:#ffd700;"></i> DAFTAR SELLER</h2>
+            </div>
+            <form class="daftar-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label>NAMA STORE / SELLER</label>
+                    <input type="text" id="daftarNama" placeholder="CONTOH: MIRULZTYZZ" required />
+                </div>
+                <div class="form-group">
+                    <label>NOMBOR WHATSAPP</label>
+                    <input type="text" id="daftarNombor" placeholder="CONTOH: 60123456789" required />
+                </div>
+                <button onclick="submitDaftar()"><i class="fas fa-paper-plane"></i> HANTAR PENDAFTARAN</button>
+                <div class="daftar-msg" id="daftarMsg"></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="page" id="dashboardPage">
+        <div class="page-box">
+            <div style="text-align:left;">
+                <button class="back-btn" onclick="backToChoice()"><i class="fas fa-arrow-left"></i> KEMBALI</button>
+            </div>
+            <div class="page-header">
+                <h2><i class="fas fa-tachometer-alt" style="color:#ffd700;"></i> DASHBOARD OWNER</h2>
+            </div>
+            <div class="dashboard-login" id="dashboardLogin">
+                <input type="password" id="dashboardPassword" placeholder="MASUKKAN PASSWORD..." />
+                <button onclick="loginDashboard()"><i class="fas fa-lock-open"></i> LOGIN</button>
+                <div class="login-error" id="loginError"></div>
+            </div>
+            <div class="dashboard-content" id="dashboardContent">
+                <p><i class="fas fa-users"></i> SENARAI PENDAFTAR</p>
+                <div class="pendaftar-list" id="pendaftarList">
+                    <div class="dashboard-empty">TIADA PENDAFTAR BARU.</div>
+                </div>
+                
+                <p style="margin-top:15px;"><i class="fas fa-store-alt"></i> DAFTAR SELLER AKTIF</p>
+                <div class="seller-active-list" id="sellerActiveList">
+                    <div class="dashboard-empty">TIADA SELLER.</div>
+                </div>
+                
+                <div style="margin-top:8px; font-size:.65rem; text-align:center; color:#665500; font-family:'Share Tech Mono',monospace;">
+                    <i class="fas fa-info-circle"></i> YANG DI-<strong style="color:#ffd700;">ACCEPT</strong> AKAN MASUK KE SENARAI SELLER.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successPopup">
+        <div class="success-popup-content">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="success-title" id="popupTitle">SUKSES!</div>
+            <div class="success-sub" id="popupSub">TERIMA KASIH</div>
+            <button class="btn-close-popup" onclick="closePopup()"><i class="fas fa-thumbs-up"></i> OK</button>
+        </div>
+    </div>
+
+    <script>
+        // VIDEO & SOUND CONTROLS
+        const video = document.getElementById('videoBackground');
+        let soundOn = false;
+
+        function toggleSound() {
+            const btn = document.getElementById('soundToggle');
+            if (video) {
+                if (soundOn) {
+                    video.muted = true;
+                    soundOn = false;
+                    btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                } else {
+                    video.muted = false;
+                    soundOn = true;
+                    btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                    video.play().catch(function(e) {
+                        console.log('Play failed:', e);
+                    });
+                }
+            }
+        }
+
+        function enableSound() {
+            if (video && !soundOn) {
+                video.muted = false;
+                soundOn = true;
+                document.getElementById('soundToggle').innerHTML = '<i class="fas fa-volume-up"></i>';
+                video.play().catch(function(e) {});
+            }
+        }
+
+        document.addEventListener('click', enableSound);
+        document.addEventListener('touchstart', enableSound);
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('introOverlay').classList.add('hidden');
+                document.getElementById('choiceOverlay').classList.add('show');
+                renderSlideSellers();
+                renderFeedbackFb();
+                renderPendaftar();
+                renderSellerActive();
+                renderChatMessages();
+                
+                if (video) {
+                    video.play().catch(function(e) {
+                        console.log('Auto-play blocked, waiting for user interaction');
+                    });
+                }
+            }, 4000);
+        });
+
+        // === DATA STORE ===
+        const defaultSellers = [
+            { name: 'MirulZtyzz Store', phone: '60148664518', icon: 'fa-store-alt' },
+            { name: 'Rell Mortal', phone: '60169066729', icon: 'fa-store-alt' },
+            { name: 'QinzMxStoreMy', phone: '601130121418', icon: 'fa-store-alt' },
+            { name: 'MarrStoreMy', phone: '60129845186', icon: 'fa-store-alt' },
+            { name: 'Izzerz', phone: '6019910755', icon: 'fa-store-alt' }
+        ];
+
+        let sellerList = JSON.parse(localStorage.getItem('sellerList')) || [...defaultSellers];
+        let feedbackData = JSON.parse(localStorage.getItem('feedbackData')) || [];
+        let pendaftarList = JSON.parse(localStorage.getItem('pendaftarList')) || [];
+        let chatMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
+
+        let currentSeller = 'MirulZtyzz Store';
+        let selectedRating = 0;
+        let currentIndex = 0;
+        let currentFilterFb = 'all';
+        let chatName = localStorage.getItem('chatName') || '';
+        let replyingTo = null;
+
+        function saveSellers(){localStorage.setItem('sellerList',JSON.stringify(sellerList))}
+        function saveFeedback(){localStorage.setItem('feedbackData',JSON.stringify(feedbackData))}
+        function savePendaftar(){localStorage.setItem('pendaftarList',JSON.stringify(pendaftarList))}
+        function saveChatMessages(){localStorage.setItem('chatMessages',JSON.stringify(chatMessages))}
+
+        // === CHAT FUNCTIONS ===
+        function setChatName() {
+            const input = document.getElementById('chatNameInput');
+            const name = input.value.trim();
+            const error = document.getElementById('chatNameError');
+            
+            if (name === '') {
+                error.textContent = '⚠️ MASUKKAN NAMA ANDA!';
+                return;
+            }
+            
+            chatName = name;
+            localStorage.setItem('chatName', chatName);
+            document.getElementById('chatCurrentUser').textContent = chatName;
+            document.getElementById('chatNameInput').value = '';
+            error.textContent = '✅ NAMA DISET: ' + chatName;
+            error.style.color = '#ffd700';
+            setTimeout(function() { error.textContent = ''; }, 2000);
+            document.getElementById('chatInput').focus();
+            renderChatMessages();
+        }
+
+        function changeName() {
+            document.getElementById('chatNameInput').style.display = 'inline-block';
+            document.getElementById('chatNameInput').focus();
+            // Reset error
+            document.getElementById('chatNameError').textContent = '✏️ TAIP NAMA BARU DAN TEKAN SET NAMA';
+            document.getElementById('chatNameError').style.color = '#aa8800';
+        }
+
+        function sendChat() {
+            if (chatName === '') {
+                document.getElementById('chatNameError').textContent = '⚠️ SET NAMA DAHULU!';
+                document.getElementById('chatNameError').style.color = '#ff4444';
+                return;
+            }
+            
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (text === '') return;
+
+            let replyText = '';
+            let replyUser = '';
+            let replyId = null;
+            
+            if (replyingTo) {
+                const replyMsg = chatMessages.find(m => m.id === replyingTo);
+                if (replyMsg) {
+                    replyText = replyMsg.text;
+                    replyUser = replyMsg.user;
+                    replyId = replyingTo;
+                }
+                cancelReply();
+            }
+
+            chatMessages.push({
+                user: chatName,
+                text: text,
+                time: new Date().toLocaleTimeString(),
+                id: Date.now(),
+                replyTo: replyId,
+                replyText: replyText,
+                replyUser: replyUser
+            });
+            
+            saveChatMessages();
+            input.value = '';
+            renderChatMessages();
+            const container = document.getElementById('chatMessages');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function renderChatMessages() {
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+            
+            if (chatMessages.length === 0) {
+                container.innerHTML = '<div style="text-align:center;color:#665500;padding:20px 0;font-weight:600;">TIADA MESEJ. MULA CHAT!</div>';
+                document.getElementById('chatCountBadge').textContent = '0 mesej';
+                return;
+            }
+
+            let html = '';
+            const sorted = [...chatMessages];
+            sorted.forEach(function(msg) {
+                const isOwner = msg.user === 'Owner';
+                const isSelf = chatName && msg.user === chatName;
+                const borderColor = isOwner ? '#ffd700' : (isSelf ? '#ffed4a' : '#665500');
+                
+                html += '<div class="chat-msg" style="border-left-color:' + borderColor + ';">';
+                html += '<div class="msg-header">';
+                html += '<span class="msg-user" onclick="replyTo(' + msg.id + ')" title="Klik untuk balas">' + msg.user + (isOwner ? ' 👑' : '') + '</span>';
+                html += '<span class="msg-time">' + msg.time + '</span>';
+                html += '</div>';
+                html += '<div class="msg-text">';
+                
+                // Show reply if exists
+                if (msg.replyTo && msg.replyUser) {
+                    html += '<div class="reply-to"><i class="fas fa-reply"></i> Balas kepada <strong>' + msg.replyUser + '</strong>: ' + msg.replyText.substring(0, 50) + (msg.replyText.length > 50 ? '...' : '') + '</div>';
+                }
+                
+                html += msg.text.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                html += '</div>';
+                
+                html += '<div class="msg-actions">';
+                html += '<button onclick="replyTo(' + msg.id + ')" title="Balas"><i class="fas fa-reply"></i> Balas</button>';
+                if (isSelf || chatName === 'Owner') {
+                    html += '<button class="del-btn" onclick="deleteChat(' + msg.id + ')" title="Padam"><i class="fas fa-trash"></i> Padam</button>';
+                }
+                html += '</div>';
+                html += '</div>';
+            });
+            
+            container.innerHTML = html;
+            document.getElementById('chatCountBadge').textContent = chatMessages.length + ' mesej';
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function replyTo(id) {
+            if (chatName === '') {
+                document.getElementById('chatNameError').textContent = '⚠️ SET NAMA DAHULU UNTUK BALAS!';
+                document.getElementById('chatNameError').style.color = '#ff4444';
+                return;
+            }
+            
+            const msg = chatMessages.find(m => m.id === id);
+            if (!msg) return;
+            
+            replyingTo = id;
+            const indicator = document.getElementById('replyIndicator');
+            document.getElementById('replyToText').textContent = 'Membalas kepada ' + msg.user + ': ' + msg.text.substring(0, 40) + (msg.text.length > 40 ? '...' : '');
+            indicator.classList.add('show');
+            document.getElementById('chatInput').focus();
+        }
+
+        function cancelReply() {
+            replyingTo = null;
+            document.getElementById('replyIndicator').classList.remove('show');
+        }
+
+        function deleteChat(id) {
+            const index = chatMessages.findIndex(m => m.id === id);
+            if (index === -1) return;
+            const msg = chatMessages[index];
+            if (chatName === 'Owner' || msg.user === chatName) {
+                chatMessages.splice(index, 1);
+                saveChatMessages();
+                renderChatMessages();
+                if (replyingTo === id) cancelReply();
+            } else {
+                showPopup('⚠️ AKSES DITOLAK', 'ANDA TIDAK BOLEH PADAM MESEJ ORANG LAIN!');
+            }
+        }
+
+        // Kosongkan Semua Chat dengan Password
+        function clearAllChat() {
+            const password = prompt('⚠️ MASUKKAN PASSWORD UNTUK KOSONGKAN SEMUA CHAT:');
+            if (password === null) return; // User cancel
+            if (password === 'MirulZtyzzAntiAmpas') {
+                if (confirm('⚠️ ANDA YAKIN MAHU KOSONGKAN SEMUA MESEJ CHAT?')) {
+                    chatMessages = [];
+                    saveChatMessages();
+                    renderChatMessages();
+                    cancelReply();
+                    showPopup('✅ CHAT DIKOSONGKAN', 'SEMUA MESEJ TELAH DIPADAM.');
+                }
+            } else {
+                showPopup('⚠️ PASSWORD SALAH!', 'ANDA TIDAK DIBENARKAN UNTUK KOSONGKAN CHAT.');
+            }
+        }
+
+        // Enter key for chat
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); sendChat(); }
+        });
+
+        // Enter key for name
+        document.getElementById('chatNameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); setChatName(); }
+        });
+
+        // Restore chat name
+        if (chatName) {
+            document.getElementById('chatCurrentUser').textContent = chatName;
+        }
+
+        // === PAGE NAVIGATION ===
+        function backToChoice(){
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+            document.getElementById('choiceOverlay').classList.remove('hidden');
+            document.getElementById('choiceOverlay').classList.add('show');
+        }
+
+        function showPage(pageId){
+            document.getElementById('choiceOverlay').classList.remove('show');
+            document.getElementById('choiceOverlay').classList.add('hidden');
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+            document.getElementById(pageId).classList.add('show');
+            if(pageId==='sellerPage'){renderSlideSellers()}
+            else if(pageId==='feedbackPage'){renderFeedbackFb()}
+            else if(pageId==='chatPage'){
+                if (chatName) {
+                    document.getElementById('chatCurrentUser').textContent = chatName;
+                }
+                renderChatMessages();
+            }
+            else if(pageId==='dashboardPage'){
+                document.getElementById('dashboardLogin').style.display='block';
+                document.getElementById('dashboardContent').classList.remove('show');
+                document.getElementById('dashboardPassword').value='';
+                document.getElementById('loginError').textContent='';
+                renderPendaftar();
+                renderSellerActive();
+            }
+            enableSound();
+        }
+
+        // === SELLER SLIDE FUNCTIONS ===
+        function renderSlideSellers(){
+            const track=document.getElementById('slideTrack');
+            const dotsContainer=document.getElementById('dotsContainer');
+            if(!track)return;
+            track.innerHTML='';
+            dotsContainer.innerHTML='';
+            if(sellerList.length===0){
+                track.innerHTML='<div class="slide-item" style="min-height:200px;display:flex;justify-content:center;align-items:center;"><div style="color:#665500;font-weight:600;">TIADA SELLER TERSEDIA</div></div>';
+                dotsContainer.innerHTML='<span class="dot active" data-index="0"></span>';
+                document.getElementById('slideLabel').innerHTML='<i class="fas fa-store-alt"></i> TIADA SELLER';
+                return;
+            }
+            sellerList.forEach(function(seller,index){
+                const div=document.createElement('div');
+                div.className='slide-item';
+                div.dataset.name=seller.name.toLowerCase();
+                div.dataset.seller=seller.name;
+                div.innerHTML=`
+                    <div class="slide-icon"><i class="fas fa-store-alt"></i></div>
+                    <div class="slide-title">${seller.name}</div>
+                    <div class="slide-sub"><i class="fas fa-check-circle"></i> TRUSTED SELLER</div>
+                    <div class="rating-stars" data-seller="${seller.name}">
+                        <input type="radio" id="s${index}-5" name="s${index}" value="5" onchange="showForm('${seller.name}')"><label for="s${index}-5"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="s${index}-4" name="s${index}" value="4" onchange="showForm('${seller.name}')"><label for="s${index}-4"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="s${index}-3" name="s${index}" value="3" onchange="showForm('${seller.name}')"><label for="s${index}-3"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="s${index}-2" name="s${index}" value="2" onchange="showForm('${seller.name}')"><label for="s${index}-2"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="s${index}-1" name="s${index}" value="1" onchange="showForm('${seller.name}')"><label for="s${index}-1"><i class="fas fa-star"></i></label>
+                    </div>
+                    <div class="rating-label">⭐ KLIK BINTANG UNTUK MEMBERI RATING</div>
+                    <a href="https://wa.me/${seller.phone}?text=Halo%20${encodeURIComponent(seller.name)}%2C%20saya%20mau%20order%20nih!" class="slide-wa-btn" target="_blank"><i class="fab fa-whatsapp"></i> CHAT OWNER</a>
+                `;
+                track.appendChild(div);
+                const dot=document.createElement('span');
+                dot.className=index===0?'dot active':'dot';
+                dot.dataset.index=index;
+                dot.addEventListener('click',function(){updateSlide(index)});
+                dotsContainer.appendChild(dot);
+            });
+            currentIndex=0;
+            updateSlide(0);
+            attachSlideEvents();
+        }
+
+        function updateSlide(index){
+            const track=document.getElementById('slideTrack');
+            const dots=document.querySelectorAll('.dot');
+            const label=document.getElementById('slideLabel');
+            const total=sellerList.length;
+            if(total===0){if(label)label.innerHTML='<i class="fas fa-store-alt"></i> TIADA SELLER';return}
+            if(index<0)index=total-1;
+            if(index>=total)index=0;
+            currentIndex=index;
+            track.style.transform='translateX(-'+(currentIndex*100)+'%)';
+            dots.forEach(function(dot,i){dot.classList.toggle('active',i===currentIndex)});
+            if(label&&sellerList[currentIndex]){label.innerHTML='<i class="fas fa-store-alt"></i> '+sellerList[currentIndex].name}
+            document.getElementById('feedbackFormContainer').classList.remove('show');
+            document.getElementById('fbUsername').value='';
+            document.getElementById('fbComment').value='';
+            document.getElementById('fbMsg').textContent='';
+            document.getElementById('fbMsg').className='feedback-msg';
+            selectedRating=0;
+            document.querySelectorAll('.rating-stars input').forEach(function(input){input.checked=false});
+        }
+
+        function attachSlideEvents(){
+            const prevBtn=document.getElementById('prevBtn');
+            const nextBtn=document.getElementById('nextBtn');
+            if(prevBtn){prevBtn.replaceWith(prevBtn.cloneNode(true));document.getElementById('prevBtn').addEventListener('click',function(){updateSlide(currentIndex-1)})}
+            if(nextBtn){nextBtn.replaceWith(nextBtn.cloneNode(true));document.getElementById('nextBtn').addEventListener('click',function(){updateSlide(currentIndex+1)})}
+            const searchBtn=document.getElementById('searchBtn');
+            const searchInput=document.getElementById('searchInput');
+            if(searchBtn){searchBtn.replaceWith(searchBtn.cloneNode(true));document.getElementById('searchBtn').addEventListener('click',function(){searchSeller()})}
+            if(searchInput){searchInput.replaceWith(searchInput.cloneNode(true));document.getElementById('searchInput').addEventListener('keypress',function(e){if(e.key==='Enter'){e.preventDefault();searchSeller()}})}
+        }
+
+        function searchSeller(){
+            const input=document.getElementById('searchInput');
+            const q=input.value.trim().toLowerCase();
+            input.value='';
+            if(q===''){updateSlide(0);return}
+            let foundIndex=-1;
+            for(let i=0;i<sellerList.length;i++){if(sellerList[i].name.toLowerCase().includes(q)){foundIndex=i;break}}
+            if(foundIndex!==-1){updateSlide(foundIndex)}else{
+                const label=document.getElementById('slideLabel');
+                const original=label.innerHTML;
+                label.innerHTML='<i class="fas fa-exclamation-circle"></i> TIDAK DITEMUKAN';
+                setTimeout(function(){label.innerHTML=original},1200)
+            }
+        }
+
+        function showForm(sellerName){
+            currentSeller=sellerName;
+            const starsDiv=document.querySelector('.rating-stars[data-seller="'+sellerName+'"]');
+            if(starsDiv){const selected=starsDiv.querySelector('input:checked');if(selected){selectedRating=parseInt(selected.value)}}
+            const form=document.getElementById('feedbackFormContainer');
+            form.classList.add('show');
+            document.getElementById('fbUsername').focus();
+            const title=form.querySelector('.form-title');
+            title.innerHTML='<i class="fas fa-star"></i> MASUKKAN USERNAME & RATING UNTUK <strong>'+sellerName+'</strong>...';
+            document.getElementById('fbMsg').textContent='';
+            document.getElementById('fbMsg').className='feedback-msg';
+        }
+
+        function submitFeedback(){
+            const usernameInput=document.getElementById('fbUsername');
+            const commentInput=document.getElementById('fbComment');
+            const msgDiv=document.getElementById('fbMsg');
+            const username=usernameInput.value.trim();
+            const comment=commentInput.value.trim();
+            if(selectedRating===0){msgDiv.textContent='⚠️ PILIH BINTANG 1-5 DI SLIDE SELLER!';msgDiv.className='feedback-msg error';return}
+            if(username===''){msgDiv.textContent='⚠️ MASUKKAN USERNAME!';msgDiv.className='feedback-msg error';return}
+            if(comment===''){msgDiv.textContent='⚠️ MASUKKAN KOMENTAR UNTUK SELLER!';msgDiv.className='feedback-msg error';return}
+            feedbackData.push({seller:currentSeller,username:username,rating:selectedRating,comment:comment,timestamp:new Date().toLocaleString()});
+            usernameInput.value='';
+            commentInput.value='';
+            selectedRating=0;
+            document.querySelectorAll('.rating-stars input').forEach(function(input){input.checked=false});
+            document.getElementById('feedbackFormContainer').classList.remove('show');
+            saveFeedback();
+            if(document.getElementById('feedbackPage').classList.contains('show')){renderFeedbackFb()}
+            showPopup('SUKSES KIRIM FEEDBACK!','TERIMA KASIH ATAS RATING & ULASAN 🙏');
+        }
+
+        function filterFeedbackFb(rating) {
+            currentFilterFb = rating;
+            document.querySelectorAll('.rating-filter-btn-fb').forEach(function(btn) {
+                btn.classList.remove('active');
+                if(btn.dataset.filter === rating) {
+                    btn.classList.add('active');
+                }
+            });
+            renderFeedbackFb();
+        }
+
+        function renderFeedbackFb(){
+            const list=document.getElementById('feedbackList');
+            if(!list)return;
+            
+            let filteredData = feedbackData;
+            if(currentFilterFb !== 'all') {
+                const filterNum = parseInt(currentFilterFb);
+                filteredData = feedbackData.filter(function(fb) {
+                    return fb.rating === filterNum;
+                });
+            }
+            
+            if(filteredData.length===0){
+                let msg = 'BELUM ADA FEEDBACK. JADI YANG PERTAMA! ⭐';
+                if(currentFilterFb !== 'all') {
+                    msg = 'TIADA FEEDBACK DENGAN RATING ' + currentFilterFb + ' BINTANG ⭐';
+                }
+                list.innerHTML='<div class="feedback-empty">'+msg+'</div>';
+                return;
+            }
+            const sorted=[...filteredData].reverse();
+            let html='';
+            sorted.forEach(function(fb){
+                const stars='⭐'.repeat(fb.rating)+'☆'.repeat(5-fb.rating);
+                html+='<div class="feedback-item"><div class="fb-seller"> '+fb.seller+'</div><div class="fb-user"> '+fb.username+'</div><div class="fb-stars">'+stars+'</div><div class="fb-rating-text">'+fb.rating+' / 5 BINTANG</div><div class="fb-comment"> '+fb.comment+'</div></div>';
+            });
+            list.innerHTML=html;
+        }
+
+        function submitDaftar(){
+            const nama=document.getElementById('daftarNama').value.trim();
+            const nombor=document.getElementById('daftarNombor').value.trim();
+            const msg=document.getElementById('daftarMsg');
+            if(nama===''){msg.textContent='⚠️ MASUKKAN NAMA STORE!';msg.className='daftar-msg error';return}
+            if(nombor===''){msg.textContent='⚠️ MASUKKAN NOMBOR WHATSAPP!';msg.className='daftar-msg error';return}
+            if(pendaftarList.find(p=>p.nama.toLowerCase()===nama.toLowerCase())){msg.textContent='⚠️ NAMA STORE SUDAH DIDAFTARKAN!';msg.className='daftar-msg error';return}
+            if(sellerList.find(s=>s.name.toLowerCase()===nama.toLowerCase())){msg.textContent='⚠️ NAMA STORE SUDAH WUJUD DALAM SENARAI SELLER!';msg.className='daftar-msg error';return}
+            pendaftarList.push({nama:nama,nombor:nombor,status:'pending',date:new Date().toLocaleString()});
+            savePendaftar();
+            document.getElementById('daftarNama').value='';
+            document.getElementById('daftarNombor').value='';
+            msg.textContent='✅ PENDAFTARAN BERJAYA! TUNGGU PENGESAHAN OWNER.';
+            msg.className='daftar-msg success';
+            renderPendaftar();
+            setTimeout(function(){msg.textContent='';msg.className='daftar-msg'},4000);
+            showPopup('PENDAFTARAN BERJAYA!','PENDAFTARAN ANDA TELAH DIHANTAR. TUNGGU PENGESAHAN OWNER.');
+        }
+
+        // === DASHBOARD ===
+        function loginDashboard(){
+            const password=document.getElementById('dashboardPassword').value;
+            const error=document.getElementById('loginError');
+            if(password==='MirulZtyzzAntiAmpas'){
+                document.getElementById('dashboardLogin').style.display='none';
+                document.getElementById('dashboardContent').classList.add('show');
+                error.textContent='';
+                renderPendaftar();
+                renderSellerActive();
+            }else{
+                error.textContent='❌ PASSWORD SALAH! CUBA LAGI.';
+            }
+        }
+
+        function renderPendaftar(){
+            const list=document.getElementById('pendaftarList');
+            if(!list)return;
+            if(pendaftarList.length===0){list.innerHTML='<div class="dashboard-empty">TIADA PENDAFTAR BARU.</div>';return}
+            let html='';
+            pendaftarList.forEach(function(p,index){
+                const statusClass=p.status==='pending'?'pending':p.status==='accepted'?'accepted':'declined';
+                const statusText=p.status==='pending'?'⏳ MENUNGGU':p.status==='accepted'?'✅ DITERIMA':'❌ DITOLAK';
+                html+='<div class="pendaftar-item"><div class="info"><strong>'+p.nama+'</strong><br />📱 '+p.nombor+'</div><div class="actions">'+(p.status==='pending'?'<button class="btn-accept" onclick="acceptPendaftar('+index+')"><i class="fas fa-check"></i> ACCEPT</button><button class="btn-decline" onclick="declinePendaftar('+index+')"><i class="fas fa-times"></i> DECLINE</button>':'<span class="status-badge '+statusClass+'">'+statusText+'</span>')+'</div></div>';
+            });
+            list.innerHTML=html;
+        }
+
+        function renderSellerActive(){
+            const list=document.getElementById('sellerActiveList');
+            if(!list)return;
+            if(sellerList.length===0){list.innerHTML='<div class="dashboard-empty">TIADA SELLER AKTIF.</div>';return;}
+            let html='';
+            sellerList.forEach(function(seller,index){
+                html+='<div class="seller-active-item"><div class="info"><strong>'+seller.name+'</strong><br />📱 '+seller.phone+'</div><div class="actions"><button class="btn-kick" onclick="kickSeller('+index+')"><i class="fas fa-times-circle"></i> KICK</button></div></div>';
+            });
+            list.innerHTML=html;
+        }
+
+        function kickSeller(index){
+            if(index<0 || index>=sellerList.length)return;
+            const sellerName = sellerList[index].name;
+            if(confirm('⚠️ ANDA YAKIN MAHU KICK SELLER "'+sellerName+'" DARI SENARAI TRUSTED?')){
+                sellerList.splice(index,1);
+                saveSellers();
+                renderSellerActive();
+                renderSlideSellers();
+                showPopup('✅ SELLER DI-KICK!',sellerName+' TELAH DIKELUARKAN DARI SENARAI TRUSTED SELLER.');
+            }
+        }
+
+        function acceptPendaftar(index){
+            const p=pendaftarList[index];
+            if(!p)return;
+            sellerList.push({name:p.nama,phone:p.nombor,icon:'fa-store-alt'});
+            p.status='accepted';
+            saveSellers();
+            savePendaftar();
+            renderPendaftar();
+            renderSellerActive();
+            renderSlideSellers();
+            showPopup('✅ SELLER DITERIMA!',p.nama+' TELAH DITAMBAHKAN KE SENARAI SELLER.');
+        }
+
+        function declinePendaftar(index){
+            const p=pendaftarList[index];
+            if(!p)return;
+            p.status='declined';
+            savePendaftar();
+            renderPendaftar();
+            showPopup('❌ SELLER DITOLAK',p.nama+' TELAH DITOLAK.');
+        }
+
+        function showPopup(title,sub){
+            document.getElementById('popupTitle').textContent=title;
+            document.getElementById('popupSub').textContent=sub;
+            document.getElementById('successPopup').classList.add('show');
+        }
+
+        function closePopup(){document.getElementById('successPopup').classList.remove('show')}
+        document.getElementById('successPopup').addEventListener('click',function(e){if(e.target===this)closePopup()});
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown',function(e){
+            const sellerPage=document.getElementById('sellerPage');
+            if(!sellerPage.classList.contains('show'))return;
+            if(e.key==='ArrowLeft'){e.preventDefault();updateSlide(currentIndex-1)}
+            else if(e.key==='ArrowRight'){e.preventDefault();updateSlide(currentIndex+1)}
+        });
+
+        let touchStartX=0,touchEndX=0;
+        const wrapper=document.querySelector('.slide-wrapper');
+        if(wrapper){
+            wrapper.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].screenX});
+            wrapper.addEventListener('touchend',function(e){
+                touchEndX=e.changedTouches[0].screenX;
+                const diff=touchStartX-touchEndX;
+                if(Math.abs(diff)>50){if(diff>0){updateSlide(currentIndex+1)}else{updateSlide(currentIndex-1)}}
+            });
+        }
+
+        // Initial render
+        renderSlideSellers();
+        renderFeedbackFb();
+        renderPendaftar();
+        renderSellerActive();
+        renderChatMessages();
+    </script>
+</body>
+</html>
